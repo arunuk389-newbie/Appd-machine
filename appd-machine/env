@@ -5,3 +5,4 @@ APPDYNAMICS_CONTROLLER_PORT=
 APPDYNAMICS_AGENT_APPLICATION_NAME=
 APPDYNAMICS_AGENT_NODE_NAME=
 APPDYNAMICS_AGENT_TIER_NAME=
+MACHINE_AGENT_PROPERTIES=-Dappdynamics.sim.enabled=true -Dappdynamics.docker.enabled=true -Dappdynamics.docker.use.monitor.machine.agent.container=true -Dappdynamics.docker.use.container.name.selector=true -Dappdynamics.docker.container.containerIdAsHostId.enabled=true
