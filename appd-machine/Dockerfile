@@ -6,14 +6,14 @@ ARG APPD_AGENT_SHA256
 RUN apt-get update -y; \
  apt-get install -y unzip
 
-COPY MachineAgent-${APPD_AGENT_VERSION}.zip /
+COPY MachineAgent-25.7.zip /
 RUN if [ "x${APPD_AGENT_SHA256}" != "x" ]; then \ 
-	echo "${APPD_AGENT_SHA256} *MachineAgent-${APPD_AGENT_VERSION}.zip" >> appd_checksum \
+	echo "${APPD_AGENT_SHA256} *MachineAgent-25.7.zip" >> appd_checksum \
     && sha256sum -c appd_checksum \
     && rm appd_checksum \
-    && unzip -oq MachineAgent-${APPD_AGENT_VERSION}.zip -d /tmp; \
+    && unzip -oq MachineAgent-25.7.zip -d /tmp; \
     else \
-     unzip -oq MachineAgent-${APPD_AGENT_VERSION}.zip -d /tmp; \
+     unzip -oq MachineAgent-25.7.zip -d /tmp; \
     fi
 
 FROM openjdk:11-jre-slim
@@ -54,6 +54,6 @@ RUN chown -R appdynamics:0 /opt/appdynamics && \
 chmod -R 774 /opt/appdynamics
 
 USER 1001
-
+VOLUME /var/run/docker.sock
 ENTRYPOINT ["/usr/bin/dumb-init"]
 CMD ["sh", "-c", "java ${MACHINE_AGENT_PROPERTIES} -jar /opt/appdynamics/machineagent.jar"]
